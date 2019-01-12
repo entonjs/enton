@@ -35,11 +35,5 @@
   "engines": {
     "node": ">=11.6.0",
     "yarn": ">=1.13.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn pre-commit",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   }
 }
