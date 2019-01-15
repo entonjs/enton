@@ -25,7 +25,9 @@
   },
   "homepage": "https://github.com/infinityjs/infinity#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "rc": "^1.2.8"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.3.1",
