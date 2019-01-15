@@ -1,17 +1,16 @@
-import fs from "fs";
-import path from "path";
-import { merge } from "lodash";
+import fs from 'fs';
+import path from 'path';
+import { merge } from 'lodash';
 
-const DEFAULT_CONFIG_FILE = "config.js";
-const ENV_CONFIG_PATTERN = "**.config.js";
+const DEFAULT_CONFIG_FILE = 'config.js';
+const ENV_CONFIG_PATTERN = '**.config.js';
 
 const readConfigFile = filePath => {
-  const content = fs.readFileSync(filePath, "utf8");
+  const content = fs.readFileSync(filePath, 'utf8');
   return JSON.parse(content);
 };
 
-const isFileExists = filePath =>
-  fs.existsSync(filePath) && fs.lstatSync(filePath).isFile();
+const isFileExists = filePath => fs.existsSync(filePath) && fs.lstatSync(filePath).isFile();
 
 const readConfig = (configPath, env) => {
   const nodeEnv = env || process.env.NODE_ENV;
@@ -28,7 +27,7 @@ const readConfig = (configPath, env) => {
   const configFiles = [DEFAULT_CONFIG_FILE];
 
   if (nodeEnv) {
-    configFiles.push(ENV_CONFIG_PATTERN.replace("**", nodeEnv));
+    configFiles.push(ENV_CONFIG_PATTERN.replace('**', nodeEnv));
   }
 
   const configContent = {};
