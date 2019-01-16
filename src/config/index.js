@@ -1,5 +1,5 @@
-import { get } from "lodash";
-import readConfig from "./reader";
+import { get } from 'lodash';
+import readConfig from './reader';
 
 class Config {
   constructor() {
