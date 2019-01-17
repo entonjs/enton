@@ -38,6 +38,10 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       
   test:
+      docker:
+          - image: circleci/node:11.6
+      requires:
+          - build
       steps:
           # run lint!
           - run: yarn lint
