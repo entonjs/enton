@@ -2,19 +2,15 @@ import { get as _get, set as _set } from 'lodash';
 
 const INFINITY_DESCRIPTOR = '__INFINITY_DESC__';
 
-const getDescriptor = target => target[INFINITY_DESCRIPTOR];
+export const getDescriptor = target => target[INFINITY_DESCRIPTOR];
 
-export const getDesc = (target, key) => {
+export const getProperty = (target, key) => {
   const descriptor = getDescriptor(target) || {};
 
-  if (key) {
-    return _get(descriptor, key);
-  }
-
-  return descriptor;
+  return _get(descriptor, key);
 };
 
-export const setDesc = (target, key, value) => {
+export const setProperty = (target, key, value) => {
   let descriptor = getDescriptor(target);
   const targetObject = target;
 

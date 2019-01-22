@@ -40,8 +40,7 @@ jobs:
   test:
       docker:
           - image: circleci/node:11.6
-      requires:
-          - build
+    
       steps:
           # run lint!
           - run: yarn lint
@@ -58,4 +57,6 @@ jobs:
         jobs:
           - build
           - test
+            requires:
+                - build
 
