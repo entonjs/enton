@@ -36,26 +36,12 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      
-  test:
-      docker:
-          - image: circleci/node:11.6
-      requires:
-          - build
-      steps:
-          # run lint!
-          - run: yarn lint
 
-          # run tests!
-          - run: yarn test
+      # run lint!
+      - run: yarn lint
 
-          - store_test_results:
-              path: test-results
-  
-  workflows:
-      version: 2
-      build_and_test:
-        jobs:
-          - build
-          - test
+      # run tests!
+      - run: yarn test
 
+      - store_test_results:
+            path: test-results
