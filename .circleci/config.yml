@@ -43,5 +43,9 @@ jobs:
       # run tests!
       - run: yarn test
 
+      - run:
+          name: create-test-coverage
+          command: 'mkdir .coverage'
+    
       - store_test_results:
-            path: test-results
+            path: .coverage
