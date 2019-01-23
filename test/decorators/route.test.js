@@ -1,9 +1,8 @@
-import Controller from '../../src/decorators/controller';
 import { getProperty } from '../../src/core/descriptor';
-import { Get } from '../../src/decorators/route';
+import { Get, Controller } from '../../src/decorators';
 
-describe('routes', () => {
-  describe('given a class with @Controller decorator and params', () => {
+describe('@Routes', () => {
+  describe('given a controller with @Get route', () => {
     @Controller('/path')
     class MyController {
       @Get('/')
@@ -12,7 +11,7 @@ describe('routes', () => {
       }
     }
 
-    test('', () => {
+    test('new @Get route add to routes', () => {
       const routes = getProperty(MyController.prototype, 'routes');
       expect(routes).toBeDefined();
       expect(routes[0]).toMatchObject({
