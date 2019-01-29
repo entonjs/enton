@@ -1,10 +1,10 @@
-import { setRoute } from './util';
+import { set } from '../core/metadata';
 
-const createRoute = (method, url) => (target, key) => {
-  setRoute(target, {
-    key,
+const createRoute = (method, url) => (target, name, descriptor) => {
+  set(target, descriptor.value, {
     method,
     url,
+    name,
   });
 };
 
