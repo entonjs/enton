@@ -1,8 +1,8 @@
-import { setProperty } from '../core/descriptor';
+import { set } from '../core/metadata';
 
 const Controller = path => target => {
-  setProperty(target.prototype, 'name', target.name);
-  setProperty(target.prototype, 'path', path || '/');
+  set(target.prototype, 'name', target.name);
+  set(target.prototype, 'path', path || '/');
 };
 
 export default Controller;

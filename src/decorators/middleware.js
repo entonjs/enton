@@ -1,14 +1,16 @@
-import { setRoute } from './util';
-import { setProperty } from '../core/descriptor';
+import { set } from '../core/metadata';
 
-const Middleware = arr => (target, key) => {
+const Middleware = arr => (target, name, descriptor) => {
   const middlewares = Array.isArray(arr) ? arr : [arr];
 
   if (typeof target === 'function') {
-    setProperty(target.prototype, 'middlewares', middlewares);
+    set(target.prototype, 'middlewares', middlewares);
+    return;
   }
 
-  setRoute(target, { key, middlewares });
+  set(target, descriptor.value, {
+    middlewares,
+  });
 };
 
 export default Middleware;

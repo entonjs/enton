@@ -1,5 +1,5 @@
-import { Controller, Get, Middleware, getRoute } from '../../src/decorators';
-import { getProperty } from '../../src/core';
+import { Controller, Middleware, Get } from '../../src/decorators';
+import { get } from '../../src/core/metadata';
 
 describe('@Middleware', () => {
   describe('given a controller with @Middleware', () => {
@@ -8,7 +8,6 @@ describe('@Middleware', () => {
     @Controller('/path')
     @Middleware(testMiddleware)
     class MyController {
-      @Get('/')
       @Middleware(testMiddleware)
       index() {
         this.response = 'test';
@@ -16,16 +15,16 @@ describe('@Middleware', () => {
     }
 
     test('controllers descriptor updated with middleware', () => {
-      const middlewares = getProperty(MyController.prototype, 'middlewares');
+      const middlewares = get(MyController.prototype, 'middlewares');
       expect(middlewares).toBeDefined();
       expect(middlewares).toHaveLength(1);
       expect(middlewares[0]).toBe(testMiddleware);
     });
 
     test('route updated with middleware', () => {
-      const route = getRoute(MyController.prototype, 'index');
-      expect(route.middlewares).toBeDefined();
-      expect(route.middlewares).toHaveLength(1);
+      const metadata = get(MyController.prototype, MyController.prototype.index);
+      expect(metadata.get('middlewares')).toBeDefined();
+      expect(metadata.get('middlewares')).toHaveLength(1);
     });
   });
 
@@ -43,7 +42,7 @@ describe('@Middleware', () => {
     }
 
     test('controllers descriptor updated with middleware', () => {
-      const middlewares = getProperty(MyController.prototype, 'middlewares');
+      const middlewares = get(MyController.prototype, 'middlewares');
       expect(middlewares).toBeDefined();
       expect(middlewares).toHaveLength(2);
       expect(middlewares[0]).toBe(testMiddleware);

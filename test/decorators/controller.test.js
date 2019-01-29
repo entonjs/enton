@@ -1,5 +1,5 @@
 import Controller from '../../src/decorators/controller';
-import { getDescriptor } from '../../src/core/descriptor';
+import { get } from '../../src/core/metadata';
 
 describe('@Controller', () => {
   describe('given a class with @Controller decorator', () => {
@@ -7,10 +7,11 @@ describe('@Controller', () => {
     class MyController {}
 
     test('descriptor updated with name and path', () => {
-      const descriptor = getDescriptor(MyController.prototype);
-      expect(descriptor).toBeDefined();
-      expect(descriptor.name).toBe('MyController');
-      expect(descriptor.path).toBe('/path');
+      const name = get(MyController.prototype, 'name');
+      const path = get(MyController.prototype, 'path');
+
+      expect(name).toBe('MyController');
+      expect(path).toBe('/path');
     });
   });
 
@@ -19,10 +20,11 @@ describe('@Controller', () => {
     class MyController {}
 
     test('descriptor updated with name and default path', () => {
-      const descriptor = getDescriptor(MyController.prototype);
-      expect(descriptor).toBeDefined();
-      expect(descriptor.name).toBe('MyController');
-      expect(descriptor.path).toBe('/');
+      const name = get(MyController.prototype, 'name');
+      const path = get(MyController.prototype, 'path');
+
+      expect(name).toBe('MyController');
+      expect(path).toBe('/');
     });
   });
 });
