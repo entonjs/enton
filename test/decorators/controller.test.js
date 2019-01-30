@@ -6,7 +6,7 @@ describe('@Controller', () => {
     @Controller('/path')
     class MyController {}
 
-    test('descriptor updated with name and path', () => {
+    it('should update metadata with name and path', () => {
       const name = get(MyController.prototype, 'name');
       const path = get(MyController.prototype, 'path');
 
@@ -15,11 +15,11 @@ describe('@Controller', () => {
     });
   });
 
-  describe('given a class with @Controller decorator without path param', () => {
+  describe('given a class with @Controller decorator without a path', () => {
     @Controller()
     class MyController {}
 
-    test('descriptor updated with name and default path', () => {
+    it('should update metadata with name and default path', () => {
       const name = get(MyController.prototype, 'name');
       const path = get(MyController.prototype, 'path');
 
