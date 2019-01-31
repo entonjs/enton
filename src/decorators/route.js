@@ -8,7 +8,7 @@ const createRoute = (method, url) => (target, name, descriptor) => {
   });
 };
 
-export const Get = url => createRoute('GET', url);
-export const Post = url => createRoute('POST', url);
-export const Delete = url => createRoute('DELETE', url);
-export const Put = url => createRoute('Put', url);
+export const Get = url => createRoute('get', url);
+export const Post = url => createRoute('post', url);
+export const Delete = url => createRoute('delete', url);
+export const Put = url => createRoute('put', url);
