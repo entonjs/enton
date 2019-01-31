@@ -15,7 +15,7 @@ describe('@Routes', () => {
       const metadata = get(MyController.prototype, MyController.prototype.index);
       expect(metadata).toBeDefined();
       expect(metadata.get('name')).toBe('index');
-      expect(metadata.get('method')).toBe('GET');
+      expect(metadata.get('method')).toBe('get');
       expect(metadata.get('url')).toBe('/');
     });
   });
