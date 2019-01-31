@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint src",
     "precommit": "lint-staged",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "yarn test --coverage"
   },
   "repository": {
     "type": "git",

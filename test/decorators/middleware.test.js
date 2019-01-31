@@ -14,14 +14,14 @@ describe('@Middleware', () => {
       }
     }
 
-    test('controllers descriptor updated with middleware', () => {
+    it('should update controller metadata with middlewares', () => {
       const middlewares = get(MyController.prototype, 'middlewares');
       expect(middlewares).toBeDefined();
       expect(middlewares).toHaveLength(1);
       expect(middlewares[0]).toBe(testMiddleware);
     });
 
-    test('route updated with middleware', () => {
+    it('should update route metadata with middleware', () => {
       const metadata = get(MyController.prototype, MyController.prototype.index);
       expect(metadata.get('middlewares')).toBeDefined();
       expect(metadata.get('middlewares')).toHaveLength(1);
@@ -41,7 +41,7 @@ describe('@Middleware', () => {
       }
     }
 
-    test('controllers descriptor updated with middleware', () => {
+    it('shoud update controller metadata with middlewares', () => {
       const middlewares = get(MyController.prototype, 'middlewares');
       expect(middlewares).toBeDefined();
       expect(middlewares).toHaveLength(2);

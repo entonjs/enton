@@ -8,7 +8,7 @@ const create = target => {
 
 export const get = (target, key) => {
   if (MetaData.has(target)) {
-    return MetaData.get(target).get(key);
+    return key ? MetaData.get(target).get(key) : MetaData.get(target);
   }
 
   return null;

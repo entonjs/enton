@@ -11,11 +11,11 @@ describe('@Routes', () => {
       }
     }
 
-    test('new @Get route add to routes', () => {
+    it('should create metadata for @Get route', () => {
       const metadata = get(MyController.prototype, MyController.prototype.index);
       expect(metadata).toBeDefined();
       expect(metadata.get('name')).toBe('index');
-      expect(metadata.get('method')).toBe('GET');
+      expect(metadata.get('method')).toBe('get');
       expect(metadata.get('url')).toBe('/');
     });
   });

@@ -1,4 +1,12 @@
 {
+  "env": {
+    "test": {
+      "retainLines": true
+    },
+    "development": {
+      "retainLines": true
+    }
+  },
   "presets": [
     "@babel/preset-env"
   ],
