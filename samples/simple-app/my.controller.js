@@ -1,15 +1,12 @@
 import { Get, Controller, Middleware } from '../../src/decorators';
-
-const middleware = (req, res, next) => {
-  next();
-};
+import upperCaseMiddleware from './upperCase.middleware';
 
 @Controller('/my')
 class MyController {
-  @Get('/:id')
-  @Middleware(middleware)
+  @Get('/:name')
+  @Middleware(upperCaseMiddleware)
   index(req, res) {
-    res.send('done');
+    res.send(`Hey there ${req.name}`);
   }
 }
 
