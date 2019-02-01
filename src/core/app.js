@@ -9,6 +9,8 @@ const createApp = appInstance => {
   controllers.forEach(Controller => {
     routerFactory(expressApp, Controller);
   });
+
+  expressApp.listen(8080);
 };
 
 export default createApp;
