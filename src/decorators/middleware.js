@@ -1,15 +1,15 @@
-import { set } from '../core/metadata';
+import Metadata from '../metadata';
 
-const Middleware = arr => (target, name, descriptor) => {
-  const middlewares = Array.isArray(arr) ? arr : [arr];
+const Middleware = middleware => (target, name, descriptor) => {
+  const middlewareArr = [].concat(middleware);
 
-  if (typeof target === 'function') {
-    set(target.prototype, 'middlewares', middlewares);
+  if (!descriptor) {
+    Metadata(target.prototype).defineMiddleware(middlewareArr);
     return;
   }
 
-  set(target, descriptor.value, {
-    middlewares,
+  Metadata(target).defineRouteMiddleware(descriptor.value, {
+    middlewareArr,
   });
 };
 
