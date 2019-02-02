@@ -1,5 +1,5 @@
 import { Get, Controller } from '../../src/decorators';
-import { get } from '../../src/core/metadata';
+import Metadata from '../../src/metadata';
 
 describe('@Routes', () => {
   describe('given a controller with @Get route', () => {
@@ -12,11 +12,10 @@ describe('@Routes', () => {
     }
 
     it('should create metadata for @Get route', () => {
-      const metadata = get(MyController.prototype, MyController.prototype.index);
+      const metadata = Metadata(MyController.prototype).getRoute(MyController.prototype.index);
       expect(metadata).toBeDefined();
-      expect(metadata.get('name')).toBe('index');
-      expect(metadata.get('method')).toBe('get');
-      expect(metadata.get('url')).toBe('/');
+      expect(metadata.method).toBe('get');
+      expect(metadata.uri).toBe('/');
     });
   });
 });
