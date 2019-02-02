@@ -3,6 +3,7 @@ import { get } from './reflect';
 import controller from './controller';
 import middleware from './middleware';
 import route from './route';
+import use from './use';
 
 const metadata = target => ({
   getType() {
@@ -14,6 +15,8 @@ const metadata = target => ({
   ...middleware(target),
 
   ...route(target),
+
+  ...use(target),
 });
 
 export default metadata;

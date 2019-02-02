@@ -1,3 +1,4 @@
 export { default as Controller } from './controller';
 export { default as Middleware } from './middleware';
-export { Get, Put, Delete, Post } from './route';
+export { Delete, Get, Post, Put } from './route';
+export { default as Use } from './use';
