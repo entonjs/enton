@@ -1,5 +1,5 @@
 import Controller from '../../src/decorators/controller';
-import { get } from '../../src/core/metadata';
+import Metadata from '../../src/metadata';
 
 describe('@Controller', () => {
   describe('given a class with @Controller decorator', () => {
@@ -7,11 +7,10 @@ describe('@Controller', () => {
     class MyController {}
 
     it('should update metadata with name and path', () => {
-      const name = get(MyController.prototype, 'name');
-      const path = get(MyController.prototype, 'path');
+      const metadata = Metadata(MyController.prototype).getController();
 
-      expect(name).toBe('MyController');
-      expect(path).toBe('/path');
+      expect(metadata.name).toBe('MyController');
+      expect(metadata.path).toBe('/path');
     });
   });
 
@@ -20,11 +19,10 @@ describe('@Controller', () => {
     class MyController {}
 
     it('should update metadata with name and default path', () => {
-      const name = get(MyController.prototype, 'name');
-      const path = get(MyController.prototype, 'path');
+      const metadata = Metadata(MyController.prototype).getController();
 
-      expect(name).toBe('MyController');
-      expect(path).toBe('/');
+      expect(metadata.name).toBe('MyController');
+      expect(metadata.path).toBe('/');
     });
   });
 });

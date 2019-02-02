@@ -1,8 +1,7 @@
-import { set } from '../core/metadata';
+import Metadata from '../metadata';
 
 const Controller = path => target => {
-  set(target.prototype, 'name', target.name);
-  set(target.prototype, 'path', path || '/');
+  Metadata(target.prototype).defineController(target.name, path || '/');
 };
 
 export default Controller;
