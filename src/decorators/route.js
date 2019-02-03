@@ -1,10 +1,9 @@
-import { set } from '../core/metadata';
+import Metadata from '../metadata';
 
-const createRoute = (method, url) => (target, name, descriptor) => {
-  set(target, descriptor.value, {
+const createRoute = (method, uri) => (target, name, descriptor) => {
+  Metadata(target).defineRoute(descriptor.value, {
+    uri,
     method,
-    url,
-    name,
   });
 };
 

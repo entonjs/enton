@@ -1,5 +1,5 @@
 import { Controller, Middleware, Get } from '../../src/decorators';
-import { get } from '../../src/core/metadata';
+import Metadata from '../../src/metadata';
 
 describe('@Middleware', () => {
   describe('given a controller with @Middleware', () => {
@@ -15,16 +15,16 @@ describe('@Middleware', () => {
     }
 
     it('should update controller metadata with middlewares', () => {
-      const middlewares = get(MyController.prototype, 'middlewares');
-      expect(middlewares).toBeDefined();
-      expect(middlewares).toHaveLength(1);
-      expect(middlewares[0]).toBe(testMiddleware);
+      const metadata = Metadata(MyController.prototype).getMiddleware();
+      expect(metadata).toBeDefined();
+      expect(metadata).toHaveLength(1);
+      expect(metadata[0]).toBe(testMiddleware);
     });
 
     it('should update route metadata with middleware', () => {
-      const metadata = get(MyController.prototype, MyController.prototype.index);
-      expect(metadata.get('middlewares')).toBeDefined();
-      expect(metadata.get('middlewares')).toHaveLength(1);
+      const metadata = Metadata(MyController.prototype).getMiddleware();
+      expect(metadata).toBeDefined();
+      expect(metadata).toHaveLength(1);
     });
   });
 
@@ -42,11 +42,11 @@ describe('@Middleware', () => {
     }
 
     it('shoud update controller metadata with middlewares', () => {
-      const middlewares = get(MyController.prototype, 'middlewares');
-      expect(middlewares).toBeDefined();
-      expect(middlewares).toHaveLength(2);
-      expect(middlewares[0]).toBe(testMiddleware);
-      expect(middlewares[1]).toBe(testMiddleware2);
+      const metadata = Metadata(MyController.prototype).getMiddleware();
+      expect(metadata).toBeDefined();
+      expect(metadata).toHaveLength(2);
+      expect(metadata[0]).toBe(testMiddleware);
+      expect(metadata[1]).toBe(testMiddleware2);
     });
   });
 });
