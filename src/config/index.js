@@ -1,18 +1,5 @@
 import { get } from 'lodash';
-import readConfig from './reader';
 
-class Config {
-  constructor() {
-    this.raw = {};
-  }
+export { default as read } from './reader';
 
-  load(options) {
-    this.raw = readConfig(options.configPath, options.evn);
-  }
-
-  get(key, defaultValue) {
-    return get(this.raw, key, defaultValue);
-  }
-}
-
-export default new Config();
+export default config => (key, defaultValue) => get(config, key, defaultValue);
