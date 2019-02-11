@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import createContext from './context';
 import appHandler from './action-handler';
 import config, { configReader } from '../config';
+import router from './router';
 
 export default async appInstance => {
   const expressApp = express();
@@ -32,6 +33,8 @@ export default async appInstance => {
   if (infinity.config('app.cookieParser.enabled')) {
     expressApp.use(cookieParser());
   }
+
+  router(expressApp, appInstance);
 
   const port = infinity.config('app.port') || 80;
 

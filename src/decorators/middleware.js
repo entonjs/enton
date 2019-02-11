@@ -8,9 +8,7 @@ const Middleware = middleware => (target, name, descriptor) => {
     return;
   }
 
-  Metadata(target).defineRouteMiddleware(descriptor.value, {
-    middlewareArr,
-  });
+  Metadata(target).defineRouteMiddleware(descriptor.value, middlewareArr);
 };
 
 export default Middleware;

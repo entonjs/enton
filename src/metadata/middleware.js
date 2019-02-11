@@ -12,7 +12,7 @@ export default target => ({
 
   defineRouteMiddleware(handler, middleware) {
     set(target, handler, {
-      middleware,
+      [MetaKeys.MIDDLEWARE]: middleware,
     });
   },
 
