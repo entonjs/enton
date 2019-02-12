@@ -5,42 +5,44 @@ import { merge } from 'lodash';
 const DEFAULT_CONFIG_FILE = 'config.js';
 const ENV_CONFIG_PATTERN = '**.config.js';
 
-const readConfigFile = filePath => {
-  const content = fs.readFileSync(filePath, 'utf8');
+const readConfigFile = async filePath => {
+  const content = await fs.readFile(filePath, 'utf8');
   return JSON.parse(content);
 };
 
 const isFileExists = filePath => fs.existsSync(filePath) && fs.lstatSync(filePath).isFile();
 
-const readConfig = (configPath, env) => {
+const read = async (configPath, env) => {
   const nodeEnv = env || process.env.NODE_ENV;
   const configRoot = path.join(process.cwd(), configPath);
+  let configContent = {};
 
   if (!fs.existsSync(configRoot)) {
     return {};
   }
 
   if (fs.lstatSync(configRoot).isFile()) {
-    return readConfigFile(configRoot);
+    configContent = await readConfigFile(configRoot);
   }
 
-  const configFiles = [DEFAULT_CONFIG_FILE];
+  if (fs.lstatSync(configRoot).isDirectory) {
+    const configFiles = [DEFAULT_CONFIG_FILE];
 
-  if (nodeEnv) {
-    configFiles.push(ENV_CONFIG_PATTERN.replace('**', nodeEnv));
-  }
-
-  const configContent = {};
-
-  configFiles.forEach(filePath => {
-    const configFilePath = path.join(configRoot, filePath);
-
-    if (isFileExists(configFilePath)) {
-      merge(configContent, readConfigFile(configFilePath));
+    if (nodeEnv) {
+      configFiles.push(ENV_CONFIG_PATTERN.replace('**', nodeEnv));
     }
-  });
+
+    configFiles.forEach(async filePath => {
+      const configFilePath = path.join(configRoot, filePath);
+
+      if (isFileExists(configFilePath)) {
+        const config = await readConfigFile(configFilePath);
+        merge(configContent, config);
+      }
+    });
+  }
 
   return configContent;
 };
 
-export default readConfig;
+export default read;

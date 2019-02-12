@@ -1,7 +1,3 @@
-// sample program for test. Need to be deleted.
+import createApp from './app';
 
-function sum(a, b) {
-  return a + b;
-}
-
-module.exports = sum;
+export default { createApp };

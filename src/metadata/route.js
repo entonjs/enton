@@ -11,9 +11,30 @@ export default target => ({
 
   getRoute(handler) {
     const routeMetadata = get(target, handler);
-    return {
-      uri: routeMetadata.get(MetaKeys.ROUTE_URI),
-      method: routeMetadata.get(MetaKeys.ROUTE_METHOD),
-    };
+
+    return (
+      routeMetadata && {
+        uri: routeMetadata.get(MetaKeys.ROUTE_URI),
+        method: routeMetadata.get(MetaKeys.ROUTE_METHOD),
+      }
+    );
+  },
+
+  getRoutes() {
+    return Object.getOwnPropertyNames(target)
+      .filter(name => typeof target[name] === 'function')
+      .reduce((routes, name) => {
+        const handler = target[name];
+        const route = this.getRoute(handler);
+
+        if (route) {
+          routes.push({
+            ...route,
+            handler,
+          });
+        }
+
+        return routes;
+      }, []);
   },
 });
