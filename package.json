@@ -1,8 +1,8 @@
 {
-  "name": "infinity",
+  "name": "@infinity/infinity",
   "version": "0.0.1-beta.0",
   "description": "Web framework for building Node.js application",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "lint": "eslint src",
     "build": "babel src -d lib",
@@ -20,7 +20,7 @@
     "javascript",
     "es6"
   ],
-  "author": "",
+  "author": "Sravan Kalluri",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/infinityjs/infinity/issues"
@@ -76,5 +76,8 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "directories": {
+    "lib": "lib"
   }
 }
