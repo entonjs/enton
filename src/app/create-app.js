@@ -11,32 +11,29 @@ import router from './router';
 export default async appInstance => {
   const expressApp = express();
   const handler = appHandler(appInstance);
-  const infinity = await createContext(expressApp);
-  const configJSON = configReader(
-    `${infinity.appRoot}/config`,
-    process.env.NODE_ENV || 'development'
-  );
+  const enton = await createContext(expressApp);
+  const configJSON = configReader(`${enton.appRoot}/config`, process.env.NODE_ENV || 'development');
 
-  global.infinity = infinity;
+  global.enton = enton;
 
-  const modifiedConfig = await handler.load(infinity, configJSON);
+  const modifiedConfig = await handler.load(enton, configJSON);
 
-  infinity.config = config(modifiedConfig);
+  enton.config = config(modifiedConfig);
 
   expressApp.use(helmet());
   expressApp.use(compression());
 
-  if (infinity.config('app.bodyParser.enabled')) {
+  if (enton.config('app.bodyParser.enabled')) {
     expressApp.use(bodyParser);
   }
 
-  if (infinity.config('app.cookieParser.enabled')) {
+  if (enton.config('app.cookieParser.enabled')) {
     expressApp.use(cookieParser());
   }
 
   router(expressApp, appInstance);
 
-  const port = infinity.config('app.port') || 80;
+  const port = enton.config('app.port') || 80;
 
   const listener = await expressApp.listen(port);
 
