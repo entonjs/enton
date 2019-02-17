@@ -1,6 +1,6 @@
 {
   "name": "enton",
-  "version": "0.0.1-beta.6",
+  "version": "0.0.1-beta.7",
   "description": "Web framework for building Node.js application",
   "main": "./lib/index.js",
   "publishConfig": {
