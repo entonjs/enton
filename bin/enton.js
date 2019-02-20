@@ -1,3 +1,6 @@
 #!/usr/bin/env node
 
-require('.bin/babel-node');
+const spawn = require('cross-spawn');
+const { argv } = require('yargs');
+
+spawn('babel-node', argv._, { stdio: 'inherit' });
