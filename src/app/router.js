@@ -29,8 +29,12 @@ const getRouter = controller => {
       args.push(...middleware);
     }
 
-    router[method](...args, (req, res, next) => {
-      handler.call(controller, req, res, next);
+    router[method](...args, (req, res) => {
+      const params = Object.values(req.params);
+
+      Promise.resolve(handler.call(controller, ...params, req.query)).then(data => {
+        res.send(data);
+      });
     });
   });
 
