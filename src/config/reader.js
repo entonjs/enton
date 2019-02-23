@@ -2,13 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import { merge } from 'lodash';
 
-const DEFAULT_CONFIG_FILE = 'config.js';
-const ENV_CONFIG_PATTERN = '**.config.js';
+const DEFAULT_CONFIG_FILE = 'config.json';
+const ENV_CONFIG_PATTERN = '**.config.json';
 
-const readConfigFile = async filePath => {
-  const content = await fs.readFile(filePath, 'utf8');
-  return JSON.parse(content);
-};
+const readConfigFile = async filePath =>
+  new Promise(resolve => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      resolve(err ? {} : JSON.parse(data));
+    });
+  });
 
 const isFileExists = filePath => fs.existsSync(filePath) && fs.lstatSync(filePath).isFile();
 
