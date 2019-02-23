@@ -4,19 +4,24 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import createContext from './context';
-import appHandler from './action-handler';
+import Lifecycles from './lifecycles';
 import config, { configReader } from '../config';
 import router from './router';
 
 export default async appInstance => {
+  const lifecycles = Lifecycles(appInstance);
+
+  process.on('uncaughtException', err => {
+    lifecycles.onError(err);
+  });
+
   const expressApp = express();
-  const handler = appHandler(appInstance);
   const enton = await createContext(expressApp);
   const configJSON = configReader(`${enton.appRoot}/config`, process.env.NODE_ENV || 'development');
 
   global.enton = enton;
 
-  const modifiedConfig = await handler.load(enton, configJSON);
+  const modifiedConfig = await lifecycles.configLoad(configJSON);
 
   enton.config = config(modifiedConfig);
 
@@ -31,11 +36,17 @@ export default async appInstance => {
     expressApp.use(cookieParser());
   }
 
+  await lifecycles.init();
+
   router(expressApp, appInstance);
+
+  await lifecycles.beforeStart();
 
   const port = enton.config('app.port') || 80;
 
   const listener = await expressApp.listen(port);
+
+  await lifecycles.start();
 
   return listener;
 };
