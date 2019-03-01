@@ -1,7 +1,17 @@
-export { Delete, Get, Post, Put } from './route';
+import Middleware from './middleware';
 
-export { default as Use } from './use';
+import { Delete, Get, Post, Put } from './route';
 
-export { default as Controller } from './controller';
+import Use from './use';
 
-export { default as Middleware } from './middleware';
+import Controller from './controller';
+
+export default {
+  Middleware,
+  Delete,
+  Get,
+  Post,
+  Put,
+  Use,
+  Controller,
+};
