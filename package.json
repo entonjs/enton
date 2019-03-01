@@ -13,7 +13,7 @@
     "lint": "eslint src",
     "build": "babel src -d lib -s inline",
     "precommit": "lint-staged",
-    "test": "jest",
+    "test": "jest -u",
     "coverage": "yarn test --coverage"
   },
   "repository": {
