@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { merge } from 'lodash';
 
-const DEFAULT_CONFIG_FILE = 'config.json';
-const ENV_CONFIG_PATTERN = '**.config.json';
+const DEFAULT_CONFIG_FILE = 'default.json';
+const ENV_CONFIG_PATTERN = '**.json';
 
 const readConfigFile = async filePath =>
   new Promise(resolve => {
@@ -27,21 +27,27 @@ const read = async (configPath, env) => {
     configContent = await readConfigFile(configRoot);
   }
 
-  if (fs.lstatSync(configRoot).isDirectory) {
+  if (fs.lstatSync(configRoot).isDirectory()) {
     const configFiles = [DEFAULT_CONFIG_FILE];
 
     if (nodeEnv) {
       configFiles.push(ENV_CONFIG_PATTERN.replace('**', nodeEnv));
     }
 
-    configFiles.forEach(async filePath => {
-      const configFilePath = path.join(configRoot, filePath);
+    const contentCollection = [];
+
+    for (let i = 0; i < configFiles.length; i += 1) {
+      const file = configFiles[i];
+      const configFilePath = path.join(configRoot, file);
 
       if (isFileExists(configFilePath)) {
-        const config = await readConfigFile(configFilePath);
-        merge(configContent, config);
+        contentCollection.push(readConfigFile(configFilePath));
       }
-    });
+    }
+
+    const config = await Promise.all(contentCollection);
+
+    merge(configContent, ...config);
   }
 
   return configContent;
