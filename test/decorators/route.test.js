@@ -1,5 +1,5 @@
-import Metadata from '../../src/metadata';
-import { Post, Get, Controller, Put, Delete } from '../../src/decorators';
+import Metadata from '../../lib/metadata';
+import { Post, Get, Controller, Put, Delete } from '../../lib/decorators';
 
 describe('@Routes', () => {
   describe('given a controller with @Get, @Post, @Put and @Delete', () => {

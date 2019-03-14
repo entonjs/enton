@@ -1,11 +1,11 @@
-import { configReader } from '../../src/config';
+import { reader } from '../../lib/config';
 
 describe('configReader', () => {
   describe('given a config.json', () => {
     let configContent;
 
     beforeEach(async () => {
-      configContent = await configReader('test/config/fixtures/config.json');
+      configContent = await reader.read('test/config/fixtures/config.json');
     });
 
     it('should read config file', () => {
@@ -19,7 +19,7 @@ describe('configReader', () => {
     let configContent;
 
     beforeEach(async () => {
-      configContent = await configReader('test/config/fixtures/config');
+      configContent = await reader.read('test/config/fixtures/config');
     });
 
     it('should read config file', () => {

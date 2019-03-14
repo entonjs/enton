@@ -1,5 +1,5 @@
-import { Use } from '../../src/decorators';
-import Metadata from '../../src/metadata';
+import { Use } from '../../lib/decorators';
+import Metadata from '../../lib/metadata';
 
 describe('@Use', () => {
   describe('given a class with @Use', () => {

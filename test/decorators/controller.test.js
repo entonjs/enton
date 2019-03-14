@@ -1,5 +1,5 @@
-import Controller from '../../src/decorators/controller';
-import Metadata from '../../src/metadata';
+import Controller from '../../lib/decorators/controller';
+import Metadata from '../../lib/metadata';
 
 describe('@Controller', () => {
   describe('given a class with @Controller decorator', () => {
