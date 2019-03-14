@@ -1,5 +1,5 @@
-import { Controller, Middleware, Get } from '../../src/decorators';
-import Metadata from '../../src/metadata';
+import { Controller, Middleware, Get } from '../../lib/decorators';
+import Metadata from '../../lib/metadata';
 
 describe('@Middleware', () => {
   describe('given a controller with @Middleware', () => {
