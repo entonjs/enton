@@ -8,5 +8,5 @@ module.exports = {
       statements: -10,
     },
   },
-  collectCoverageFrom: ['src/**/*.{js,jsx}', '!**/node_modules/**', '!**/lib/**', '!**/bin/**'],
+  collectCoverageFrom: ['lib/**/*.{js,jsx}', '!**/node_modules/**', '!**/lib/**', '!**/bin/**'],
 };
