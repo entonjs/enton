@@ -7,7 +7,7 @@
     "access": "public"
   },
   "scripts": {
-    "lint": "eslint src",
+    "lint": "eslint lib",
     "precommit": "lint-staged",
     "test": "jest -u",
     "coverage": "yarn test --coverage"
